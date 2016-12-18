@@ -4,7 +4,13 @@ ENV DEVKITPRO /opt/devkitPro
 ENV DEVKITARM ${DEVKITPRO}/devkitARM
 
 RUN apt-get update --fix-missing
-RUN apt-get install -y clang cmake make git
+RUN apt-get install -y clang cmake make git curl
+RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
+RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" && \
+    curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture).asc" && \
+    gpg --verify /usr/local/bin/gosu.asc && \
+    rm /usr/local/bin/gosu.asc && \
+    chmod +x /usr/local/bin/gosu
 
 ADD devkitPro /opt/devkitPro
 RUN git clone https://github.com/wombatant/ox.git /usr/local/src/ox && \
@@ -29,6 +35,6 @@ WORKDIR /usr/src/project
 
 ADD entrypoint.sh /
 
-ENTRYPOINT /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["make", "-j"]
