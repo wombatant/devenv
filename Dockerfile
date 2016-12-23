@@ -22,8 +22,8 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 ADD devkitPro /opt/devkitPro
 RUN git clone https://github.com/wombatant/ox.git /usr/local/src/ox && \
     cd /usr/local/src/ox && \
-    git checkout -b install 1b2f87197b92ed0af26614be0b92d92384f0c192
-RUN mkdir -p /usr/local/src/ox/build/release /usr/local/src/ox/build/gba
+    git checkout -b install 666f455cfd18a673199b8a2e0fe69f4fe5ecffd5
+RUN mkdir -p /usr/local/src/ox/build/release /usr/local/src/ox/build/windows /usr/local/src/ox/build/gba
 
 # install Ox
 RUN cd /usr/local/src/ox/build/release && \
@@ -35,6 +35,14 @@ RUN cd /usr/local/src/ox/build/gba && \
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON\
           -DCMAKE_TOOLCHAIN_FILE=cmake/Modules/GBA.cmake\
           -DCMAKE_INSTALL_PREFIX=/opt/devkitPro/devkitARM \
+          -DOX_BUILD_EXEC=OFF ../../ && \
+    make -j install
+
+# install Ox for GBA
+RUN cd /usr/local/src/ox/build/windows && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON\
+          -DCMAKE_TOOLCHAIN_FILE=cmake/Modules/GBA.cmake\
+          -DCMAKE_INSTALL_PREFIX=/usr/x86_64-w64-mingw32 \
           -DOX_BUILD_EXEC=OFF ../../ && \
     make -j install
 
