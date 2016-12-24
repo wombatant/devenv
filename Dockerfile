@@ -23,6 +23,7 @@ RUN apt-get install -y g++
 RUN apt-get install -y g++-mingw-w64-x86-64
 RUN apt-get install -y cmake make
 RUN apt-get install -y git
+RUN apt-get install -y vim
 
 RUN apt-get install -y libsdl2-dev
 
@@ -33,7 +34,7 @@ ADD devkitPro /opt/devkitPro
 
 RUN git clone https://github.com/wombatant/ox.git /usr/local/src/ox && \
     cd /usr/local/src/ox && \
-    git checkout -b install 9139274ca138bc7109aef5ff6fa07c7d585cc5c6
+    git checkout -b install 895e79d345bb14fa645096d95e749479f3fa7757
 
 RUN mkdir -p \
              /usr/local/src/ox/build/release \
