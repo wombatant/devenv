@@ -27,9 +27,14 @@ RUN apt-get install -y g++ \
                        sudo
 ADD devkitPro /opt/devkitPro
 
+###############################################################################
+# Setup working directory
+
+RUN mkdir /usr/src/project
+WORKDIR /usr/src/project
+
+###############################################################################
+# Setup entrypoint
 
 ADD entrypoint.sh /
-
 ENTRYPOINT ["/entrypoint.sh"]
-
-CMD ["make", "-j"]
