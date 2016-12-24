@@ -19,13 +19,12 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 ###############################################################################
 # Install dev tools
 
-RUN apt-get install -y g++
-RUN apt-get install -y g++-mingw-w64-x86-64
-RUN apt-get install -y cmake make
-RUN apt-get install -y git
-RUN apt-get install -y vim
-
-RUN apt-get install -y libsdl2-dev
+RUN apt-get install -y g++ \
+                       g++-mingw-w64-x86-64 \
+                       cmake make \
+                       git \
+                       vim \
+                       sudo
 
 ADD devkitPro /opt/devkitPro
 
@@ -34,30 +33,27 @@ ADD devkitPro /opt/devkitPro
 
 RUN git clone https://github.com/wombatant/ox.git /usr/local/src/ox && \
     cd /usr/local/src/ox && \
-    git checkout -b install 895e79d345bb14fa645096d95e749479f3fa7757
-
-RUN mkdir -p \
+    git checkout -b install 895e79d345bb14fa645096d95e749479f3fa7757; \
+	 # setup build dirs
+    mkdir -p \
              /usr/local/src/ox/build/release \
              /usr/local/src/ox/build/windows \
-             /usr/local/src/ox/build/gba
-
-# install Ox for native environment
-RUN cd /usr/local/src/ox/build/release && \
+             /usr/local/src/ox/build/gba; \
+    # install Ox for native environment
+    cd /usr/local/src/ox/build/release && \
     cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../../ && \
-    make -j install
-
-# install Ox for GBA
-RUN cd /usr/local/src/ox/build/gba && \
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON\
-          -DCMAKE_TOOLCHAIN_FILE=cmake/Modules/GBA.cmake\
+    make -j install; \
+    # install Ox for GBA
+    cd /usr/local/src/ox/build/gba && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+          -DCMAKE_TOOLCHAIN_FILE=cmake/Modules/GBA.cmake \
           -DCMAKE_INSTALL_PREFIX=/opt/devkitPro/devkitARM \
           -DOX_BUILD_EXEC=OFF ../../ && \
-    make -j install
-
-# install Ox for Windows
-RUN cd /usr/local/src/ox/build/windows && \
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON\
-          -DCMAKE_TOOLCHAIN_FILE=cmake/Modules/GBA.cmake\
+    make -j install; \
+    # install Ox for Windows
+    cd /usr/local/src/ox/build/windows && \
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+          -DCMAKE_TOOLCHAIN_FILE=cmake/Modules/GBA.cmake \
           -DCMAKE_INSTALL_PREFIX=/usr/x86_64-w64-mingw32 \
           -DOX_BUILD_EXEC=OFF ../../ && \
     make -j install
