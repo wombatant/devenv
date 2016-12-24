@@ -33,7 +33,7 @@ ADD devkitPro /opt/devkitPro
 
 RUN git clone https://github.com/wombatant/ox.git /usr/local/src/ox && \
     cd /usr/local/src/ox && \
-    git checkout -b install 7dc22532e82f20031ae23511e3c8999739f671ff
+    git checkout -b install 9139274ca138bc7109aef5ff6fa07c7d585cc5c6
 
 RUN mkdir -p \
              /usr/local/src/ox/build/release \
