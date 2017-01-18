@@ -28,6 +28,22 @@ RUN apt-get install -y g++ \
 ADD devkitPro /opt/devkitPro
 
 ###############################################################################
+# Install mgba
+
+RUN apt-get install -y qt5-default zlib1g-dev libpng-dev qtmultimedia5-dev \
+                       libsdl2-dev
+RUN cd /usr/src && \
+    curl https://codeload.github.com/mgba-emu/mgba/tar.gz/0.5.2 > mgba.tar.gz && \
+	 tar xf mgba.tar.gz && \
+	 rm mgba.tar.gz && \
+    cd mgba-0.5.2 && \
+	 mkdir build && \
+	 cd build && \
+	 cmake .. && \
+	 make -j && \
+	 make install
+
+###############################################################################
 # Setup working directory
 
 RUN mkdir /usr/src/project
