@@ -40,7 +40,7 @@ RUN cd /usr/src && \
 	 mkdir build && \
 	 cd build && \
 	 cmake .. && \
-	 make -j && \
+	 make && \
 	 make install
 
 ###############################################################################
