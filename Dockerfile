@@ -30,8 +30,10 @@ ADD devkitPro /opt/devkitPro
 ###############################################################################
 # Install mgba
 
-RUN apt-get install -y qt5-default zlib1g-dev libpng-dev qtmultimedia5-dev \
-                       libsdl2-dev
+RUN apt-get install -y qt5-default qtmultimedia5-dev zlib1g-dev libpng-dev \
+                       libsdl2-dev libmagickwand-6.q16-dev libepoxy-dev \
+							  libzip-dev libedit-dev libavcodec-dev libavformat-dev \
+							  libminizip-dev libswscale-dev
 RUN cd /usr/src && \
     curl https://codeload.github.com/mgba-emu/mgba/tar.gz/0.5.2 > mgba.tar.gz && \
 	 tar xf mgba.tar.gz && \
