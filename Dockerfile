@@ -42,6 +42,8 @@ RUN cd /usr/src && \
 	 cmake .. && \
 	 make && \
 	 make install
+RUN echo "/usr/local/lib64" > /etc/ld.so.conf.d/usr-local-lib64.conf
+RUN ldconfig
 
 ###############################################################################
 # Setup working directory
