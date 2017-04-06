@@ -33,6 +33,11 @@ ADD devkitPro /opt/devkitPro
 RUN apt-get install -y visualboyadvance-gtk
 
 ###############################################################################
+# Setup sudoers
+
+ADD etc/sudoers /etc/sudoers
+
+###############################################################################
 # Setup working directory
 
 RUN mkdir /usr/src/project
