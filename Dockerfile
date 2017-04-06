@@ -28,24 +28,9 @@ RUN apt-get install -y g++ \
 ADD devkitPro /opt/devkitPro
 
 ###############################################################################
-# Install mgba
+# Install GBA emulator
 
-RUN apt-get install -y qt5-default qtmultimedia5-dev zlib1g-dev libpng-dev \
-                       libsdl2-dev libmagickwand-6.q16-dev libepoxy-dev \
-							  libzip-dev libedit-dev libavcodec-dev libavformat-dev \
-							  libminizip-dev libswscale-dev
-RUN cd /usr/src && \
-    curl https://codeload.github.com/mgba-emu/mgba/tar.gz/0.5.2 > mgba.tar.gz && \
-	 tar xf mgba.tar.gz && \
-	 rm mgba.tar.gz && \
-    cd mgba-0.5.2 && \
-	 mkdir build && \
-	 cd build && \
-	 cmake .. && \
-	 make && \
-	 make install
-RUN echo "/usr/local/lib64" > /etc/ld.so.conf.d/usr-local-lib64.conf
-RUN ldconfig
+RUN apt-get install -y visualboyadvance-gtk
 
 ###############################################################################
 # Setup working directory
