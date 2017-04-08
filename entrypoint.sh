@@ -13,6 +13,7 @@ if [[ $(id -u user 2> /dev/null) != $USER_ID ]]; then
 	useradd --shell /bin/bash -u $USER_ID -o -c "" -m user
 	export HOME=/home/user
 	echo "set -o vi" >> $HOME/.bashrc
+	echo "export PATH=\${PATH}:/opt/devkitPro/devkitARM/bin/" >> $HOME/.bashrc
 fi
 
 exec /usr/local/bin/gosu user "$@"
