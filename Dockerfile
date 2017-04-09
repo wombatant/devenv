@@ -19,7 +19,7 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 ###############################################################################
 # Install dev tools
 
-RUN apt-get install -y g++ \
+RUN apt-get install -y clang \
                        g++-mingw-w64-x86-64 \
                        cmake make \
                        git \

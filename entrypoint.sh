@@ -14,6 +14,8 @@ if [[ $(id -u user 2> /dev/null) != $USER_ID ]]; then
 	export HOME=/home/user
 	echo "set -o vi" >> $HOME/.bashrc
 	echo "export PATH=\${PATH}:/opt/devkitPro/devkitARM/bin/" >> $HOME/.bashrc
+	echo "export CC=/usr/bin/clang" >> $HOME/.bashrc
+	echo "export CXX=/usr/bin/clang++" >> $HOME/.bashrc
 fi
 
 exec /usr/local/bin/gosu user "$@"
