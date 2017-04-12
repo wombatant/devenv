@@ -27,6 +27,10 @@ RUN apt-get install -y clang \
                        sudo
 ADD devkitPro /opt/devkitPro
 
+# Install Qt Libraries
+
+RUN apt-get install -y qt5-default qtmultimedia5-dev
+
 ###############################################################################
 # Install GBA emulator
 
