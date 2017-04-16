@@ -1,17 +1,17 @@
-FROM debian:8
+FROM fedora:25
 
 ENV DEVKITPRO /opt/devkitPro
 ENV DEVKITARM ${DEVKITPRO}/devkitARM
 
-RUN apt-get update
+RUN dnf update -y
 
 ###############################################################################
 # Install gosu
 
-RUN apt-get install -y curl
+RUN dnf install -y curl gnupg
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture)" && \
-    curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-$(dpkg --print-architecture).asc" && \
+RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-amd64" && \
+    curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.4/gosu-amd64.asc" && \
     gpg --verify /usr/local/bin/gosu.asc && \
     rm /usr/local/bin/gosu.asc && \
     chmod +x /usr/local/bin/gosu
@@ -19,22 +19,22 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 ###############################################################################
 # Install dev tools
 
-RUN apt-get install -y clang \
-                       g++-mingw-w64-x86-64 \
-                       cmake make \
-                       git \
-                       vim \
-                       sudo
+RUN dnf install -y clang \
+                   mingw64-gcc-c++ \
+                   cmake make \
+                   git \
+                   vim \
+                   sudo
 ADD devkitPro /opt/devkitPro
 
 # Install Qt Libraries
 
-RUN apt-get install -y qt5-default qtmultimedia5-dev
+RUN dnf install -y qt5-devel
 
 ###############################################################################
 # Install GBA emulator
 
-RUN apt-get install -y visualboyadvance-gtk
+RUN dnf install -y vbam-gtk
 
 ###############################################################################
 # Setup sudoers
