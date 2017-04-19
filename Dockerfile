@@ -20,6 +20,8 @@ RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/dow
 # Install dev tools
 
 RUN dnf install -y clang \
+                   llvm \
+                   libasan \
                    mingw64-gcc-c++ \
                    cmake make \
                    git \
