@@ -1,4 +1,4 @@
-FROM fedora:25
+FROM fedora:26
 
 ENV DEVKITPRO /opt/devkitPro
 ENV DEVKITARM ${DEVKITPRO}/devkitARM
@@ -26,17 +26,11 @@ RUN dnf install -y clang \
                    cmake make \
                    git \
                    vim \
-                   sudo
+                   sudo \
+                   fuse-devel \
+                   qt5-devel
+
 ADD devkitPro /opt/devkitPro
-
-# Install Qt Libraries
-
-RUN dnf install -y qt5-devel
-
-###############################################################################
-# Install GBA emulator
-
-RUN dnf install -y vbam-gtk
 
 ###############################################################################
 # Setup sudoers
