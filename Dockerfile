@@ -1,4 +1,4 @@
-FROM fedora:26
+FROM fedora:25
 
 ENV DEVKITPRO /opt/devkitPro
 ENV DEVKITARM ${DEVKITPRO}/devkitARM
