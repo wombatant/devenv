@@ -1,4 +1,4 @@
-FROM fedora:27
+FROM fedora:29
 
 ENV DEVKITPRO /opt/devkitPro
 ENV DEVKITARM ${DEVKITPRO}/devkitARM
@@ -25,6 +25,7 @@ RUN dnf install -y clang \
                    mingw64-gcc-c++ \
                    cmake \
                    make \
+						 ninja-build \
                    git \
                    vim \
                    sudo \
