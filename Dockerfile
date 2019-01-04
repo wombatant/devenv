@@ -25,7 +25,7 @@ RUN dnf install -y clang \
                    mingw64-gcc-c++ \
                    cmake \
                    make \
-						 ninja-build \
+                   ninja-build \
                    git \
                    vim \
                    sudo \
