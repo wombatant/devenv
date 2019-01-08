@@ -28,6 +28,7 @@ RUN dnf install -y clang \
                    ninja-build \
                    git \
                    vim \
+						 findutils \
                    sudo \
                    fuse-devel \
                    qt5-devel
